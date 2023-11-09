@@ -4,35 +4,46 @@ function getComputerChoice(){
     return options[randomNumber]
 }
 
-function returnResult(playerSelection, computerSelection){
+function evaluateDecisions(playerSelection, computerSelection){
     if (playerSelection === computerSelection){
-        let result = [[0,0], `draw ${playerSelection} and ${computerSelection} equals out!`];
-        return result
+        return [[0,0], `draw ${playerSelection} and ${computerSelection} equals out!`];
     } else if (playerSelection === "rock" && computerSelection === "paper"){
-        let result = [[0,1], 'You Lose! Paper beats Rock'];
-        return result
+        return [[0,1], 'You Lose! Paper beats Rock'];
     } else if (playerSelection === "paper" && computerSelection === "sciccors"){
-        let result = [[0,1], 'You Lose! Sciccors beats Paper'];
-        return result
+        return [[0,1], 'You Lose! Sciccors beats Paper'];
     } else if (playerSelection === "sciccors" && computerSelection === "rock"){
-        let result = [[0,1], 'You Lose! Rock beats Sciccors'];
-        return result
+        return [[0,1], 'You Lose! Rock beats Sciccors'];
     } else if (playerSelection === "rock" && computerSelection === "sciccors"){
-        let result = [[1,0], 'You Win! Rock beats Sciccors'];
-        return result
+        return [[1,0], 'You Win! Rock beats Sciccors'];
     } else if (playerSelection === "paper" && computerSelection === "rock"){
-        let result = [[1,0], 'You Win! Paper beats Rock'];
-        return result
+        return [[1,0], 'You Win! Paper beats Rock'];
     } else if (playerSelection === "sciccors" && computerSelection === "paper"){
-        let result = [[1,0], 'You Win! Sciccors beats Paper'];
-        return result
+        return[[1,0], 'You Win! Sciccors beats Paper'];
     }
 }
 
+
 function playRound(playerSelection, computerSelection){
     playerSelection = playerSelection.toLowerCase();
-    computerSelection = computerSelection.toLowerCase()
-    return returnResult(playerSelection, computerSelection)
+    computerSelection = computerSelection.toLowerCase();
+    return evaluateDecisions(playerSelection, computerSelection)
+}
+
+function adaptScores(oneRoundScore, scoreArray){
+    scoreArray = scoreArray.map((num, idx) => {
+        return num + oneRoundScore[idx]
+    })
+    return scoreArray
+}
+
+function chooseWinner(scoreArray){
+    if (scoreArray[0] > scoreArray[1]){
+        console.log("you won")
+    } else if (scoreArray[0] < scoreArray[1]){
+        console.log("computer won - you lost")
+    } else {
+        console.log("it is a draw between you and the computer")
+    }
 }
 
 function game(){
@@ -40,22 +51,13 @@ function game(){
         let yourChoice = prompt("Enter Rock, Paper or Sciccor!", "rock");
         let computerChoice = getComputerChoice();
         let result = playRound(yourChoice, computerChoice);
-        if (result[0][0] === 1){
-            ownScore += 1;
-        } else if (result[0][1] === 1){
-            computerScore += 1;
-        }
+
+        scoreArray = adaptScores(result[0], scoreArray);
+
         console.log(result[1]);
     }
-    if (ownScore > computerScore){
-        console.log("you won")
-    } else if (ownScore < computerScore){
-        console.log("computer won")
-    } else {
-        console.log("draw")
-    }
+    chooseWinner(scoreArray);
 }
 
-let ownScore = 0;
-let computerScore = 0;
+let scoreArray = [0,0];
 game();
