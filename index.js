@@ -38,11 +38,11 @@ function adaptScores(oneRoundScore, scoreArray){
 
 function chooseWinner(scoreArray){
     if (scoreArray[0] > scoreArray[1]){
-        console.log("you won")
+        return "you won"
     } else if (scoreArray[0] < scoreArray[1]){
-        console.log("computer won - you lost")
+        return "computer won - you lost"
     } else {
-        console.log("it is a draw between you and the computer")
+        return "it is a draw between you and the computer"
     }
 }
 
@@ -56,7 +56,7 @@ function game(){
 
         console.log(result[1]);
     }
-    chooseWinner(scoreArray);
+    console.log(chooseWinner(scoreArray));
 }
 
 let scoreArray = [0,0];
