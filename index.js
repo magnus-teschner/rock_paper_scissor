@@ -46,7 +46,17 @@ function chooseWinner(scoreArray){
     }
 }
 
+function generateText(result, playerChoice, computerChoice){
+    if (result[0] === result [1]){
+        return ['It is a draw!', `${playerChoice} ties with ${computerChoice}!`]
+    } else if (result[0] > result[1]){
+        return ['You win!', `${playerChoice} beats ${computerChoice}!`]
+    } else {
+        return ['You lose!', `${computerChoice} beats ${playerChoice}!`]
+    }
 
+
+}
 
 function game(){
     for (let i = 0; i < 5; i++){
@@ -74,8 +84,14 @@ buttons.forEach((button) => button.addEventListener('click', ()=> {
     playerChoiceDisplay.textContent = playerChoice;
     computerChoiceDisplay.textContent = computerChoice;
 
-    let result = playRound(playerChoice, computerChoice)
-    console.log(result);
+    let result = playRound(playerChoice, computerChoice);
+    const text = generateText(result, playerChoice, computerChoice);
+
+    const winLoseMessage = document.querySelector('.instructions');
+    const explanation = document.querySelector('.end-game-description');
+
+    winLoseMessage.textContent = text[0];
+    explanation.textContent = text[1];
 
     }
 ));
