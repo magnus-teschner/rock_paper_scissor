@@ -7,25 +7,25 @@ function getComputerChoice(){
 function evaluateDecisions(playerSelection, computerSelection){
     if (playerSelection === computerSelection){
         return [0,0];
-    } else if (playerSelection === "✊" && computerSelection === "🖐️"){
+    } 
+    
+    else if 
+    (playerSelection === "✊" && computerSelection === "🖐️" ||
+    playerSelection === "🖐️" && computerSelection === "✌️" ||
+    playerSelection === "✌️" && computerSelection === "✊"){
         return [0,1];
-    } else if (playerSelection === "🖐️" && computerSelection === "✌️"){
-        return [0,1];
-    } else if (playerSelection === "✌️" && computerSelection === "✊"){
-        return [0,1];
-    } else if (playerSelection === "✊" && computerSelection === "✌️"){
+    } 
+    
+    else if 
+    (playerSelection === "✊" && computerSelection === "✌️" ||
+    playerSelection === "🖐️" && computerSelection === "✊" ||
+    playerSelection === "✌️" && computerSelection === "🖐️"){
         return [1,0];
-    } else if (playerSelection === "🖐️" && computerSelection === "✊"){
-        return [1,0];
-    } else if (playerSelection === "✌️" && computerSelection === "🖐️"){
-        return[1,0];
     }
 }
 
 
 function playRound(playerSelection, computerSelection){
-    playerSelection = playerSelection.toLowerCase();
-    computerSelection = computerSelection.toLowerCase();
     return evaluateDecisions(playerSelection, computerSelection)
 }
 
@@ -37,7 +37,6 @@ function adaptScores(oneRoundScore, scoreArray){
 }
 
 function chooseWinner(scoreArray){
-
     if (scoreArray[0] > scoreArray[1]){
         return "You won - reload to play again!"
     } else if (scoreArray[0] < scoreArray[1]){
@@ -53,23 +52,13 @@ function generateText(result, playerChoice, computerChoice){
     } else {
         return ['You lose!', `${computerChoice} beats ${playerChoice}!`]
     }
-
-
 }
 
-function game(){
-    for (let i = 0; i < 5; i++){
-        let yourChoice = prompt("Enter Rock, Paper or Sciccor!", "rock");
-        let computerChoice = getComputerChoice();
-        let result = playRound(yourChoice, computerChoice);
-        scoreArray = adaptScores(result[0], scoreArray);
-    }
-    console.log(chooseWinner(scoreArray));
-}
+
 
 let scoreArray = [0,0];
-//game();
 const buttons = document.querySelectorAll('button');
+
 buttons.forEach((button) => button.addEventListener('click', ()=> {
 
     let playerChoice = button.querySelector('.sign').textContent;
@@ -102,6 +91,5 @@ buttons.forEach((button) => button.addEventListener('click', ()=> {
         winLoseMessage.textContent = chooseWinner(scoreArray);
         buttons.forEach((button) => button.disabled = true);
     }
-    
     }
 ));
