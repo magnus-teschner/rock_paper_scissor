@@ -6,19 +6,19 @@ function getComputerChoice(){
 
 function evaluateDecisions(playerSelection, computerSelection){
     if (playerSelection === computerSelection){
-        return [[0,0], `draw ${playerSelection} and ${computerSelection} equals out!`];
-    } else if (playerSelection === "rock" && computerSelection === "🖐️"){
-        return [[0,1], 'You Lose! Paper beats Rock'];
-    } else if (playerSelection === "paper" && computerSelection === "✌️"){
-        return [[0,1], 'You Lose! Sciccors beats Paper'];
-    } else if (playerSelection === "sciccors" && computerSelection === "✊"){
-        return [[0,1], 'You Lose! Rock beats Sciccors'];
-    } else if (playerSelection === "rock" && computerSelection === "✌️"){
-        return [[1,0], 'You Win! Rock beats Sciccors'];
-    } else if (playerSelection === "paper" && computerSelection === "✊"){
-        return [[1,0], 'You Win! Paper beats Rock'];
-    } else if (playerSelection === "sciccors" && computerSelection === "🖐️"){
-        return[[1,0], 'You Win! Sciccors beats Paper'];
+        return [0,0];
+    } else if (playerSelection === "✊" && computerSelection === "🖐️"){
+        return [0,1];
+    } else if (playerSelection === "🖐️" && computerSelection === "✌️"){
+        return [0,1];
+    } else if (playerSelection === "✌️" && computerSelection === "✊"){
+        return [0,1];
+    } else if (playerSelection === "✊" && computerSelection === "✌️"){
+        return [1,0];
+    } else if (playerSelection === "🖐️" && computerSelection === "✊"){
+        return [1,0];
+    } else if (playerSelection === "✌️" && computerSelection === "🖐️"){
+        return[1,0];
     }
 }
 
@@ -65,6 +65,17 @@ let scoreArray = [0,0];
 //game();
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => button.addEventListener('click', ()=> {
-    console.log("clicked")
+    let playerChoice = button.querySelector('.sign').textContent;
+    let computerChoice = getComputerChoice();
+
+    const playerChoiceDisplay = document.querySelector('#player-choice-display');
+    const computerChoiceDisplay = document.querySelector('#computer-choice-display');
+
+    playerChoiceDisplay.textContent = playerChoice;
+    computerChoiceDisplay.textContent = computerChoice;
+
+    let result = playRound(playerChoice, computerChoice)
+    console.log(result);
+
     }
 ));
