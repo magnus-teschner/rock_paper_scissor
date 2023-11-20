@@ -1,23 +1,23 @@
 function getComputerChoice(){
     let randomNumber = Math.floor(Math.random() * 3);
-    let options = ["rock", "paper", "sciccors"]
+    let options = ["✊", "🖐️", "✌️"]
     return options[randomNumber]
 }
 
 function evaluateDecisions(playerSelection, computerSelection){
     if (playerSelection === computerSelection){
         return [[0,0], `draw ${playerSelection} and ${computerSelection} equals out!`];
-    } else if (playerSelection === "rock" && computerSelection === "paper"){
+    } else if (playerSelection === "rock" && computerSelection === "🖐️"){
         return [[0,1], 'You Lose! Paper beats Rock'];
-    } else if (playerSelection === "paper" && computerSelection === "sciccors"){
+    } else if (playerSelection === "paper" && computerSelection === "✌️"){
         return [[0,1], 'You Lose! Sciccors beats Paper'];
-    } else if (playerSelection === "sciccors" && computerSelection === "rock"){
+    } else if (playerSelection === "sciccors" && computerSelection === "✊"){
         return [[0,1], 'You Lose! Rock beats Sciccors'];
-    } else if (playerSelection === "rock" && computerSelection === "sciccors"){
+    } else if (playerSelection === "rock" && computerSelection === "✌️"){
         return [[1,0], 'You Win! Rock beats Sciccors'];
-    } else if (playerSelection === "paper" && computerSelection === "rock"){
+    } else if (playerSelection === "paper" && computerSelection === "✊"){
         return [[1,0], 'You Win! Paper beats Rock'];
-    } else if (playerSelection === "sciccors" && computerSelection === "paper"){
+    } else if (playerSelection === "sciccors" && computerSelection === "🖐️"){
         return[[1,0], 'You Win! Sciccors beats Paper'];
     }
 }
@@ -46,6 +46,8 @@ function chooseWinner(scoreArray){
     }
 }
 
+
+
 function game(){
     for (let i = 0; i < 5; i++){
         let yourChoice = prompt("Enter Rock, Paper or Sciccor!", "rock");
@@ -60,4 +62,9 @@ function game(){
 }
 
 let scoreArray = [0,0];
-game();
+//game();
+const buttons = document.querySelectorAll('button');
+buttons.forEach((button) => button.addEventListener('click', ()=> {
+    console.log("clicked")
+    }
+));
