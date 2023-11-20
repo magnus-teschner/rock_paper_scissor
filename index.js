@@ -37,13 +37,12 @@ function adaptScores(oneRoundScore, scoreArray){
 }
 
 function chooseWinner(scoreArray){
+
     if (scoreArray[0] > scoreArray[1]){
-        return "you won"
+        return "You won - reload to play again!"
     } else if (scoreArray[0] < scoreArray[1]){
-        return "computer won - you lost"
-    } else {
-        return "it is a draw between you and the computer"
-    }
+        return "Computer won - reload to play again!"}
+    
 }
 
 function generateText(result, playerChoice, computerChoice){
@@ -63,10 +62,7 @@ function game(){
         let yourChoice = prompt("Enter Rock, Paper or Sciccor!", "rock");
         let computerChoice = getComputerChoice();
         let result = playRound(yourChoice, computerChoice);
-
         scoreArray = adaptScores(result[0], scoreArray);
-
-        console.log(result[1]);
     }
     console.log(chooseWinner(scoreArray));
 }
@@ -75,6 +71,7 @@ let scoreArray = [0,0];
 //game();
 const buttons = document.querySelectorAll('button');
 buttons.forEach((button) => button.addEventListener('click', ()=> {
+
     let playerChoice = button.querySelector('.sign').textContent;
     let computerChoice = getComputerChoice();
 
@@ -93,5 +90,18 @@ buttons.forEach((button) => button.addEventListener('click', ()=> {
     winLoseMessage.textContent = text[0];
     explanation.textContent = text[1];
 
+    scoreArray = adaptScores(result, scoreArray);
+    const playerScoreDisplay = document.querySelector('#player-score');
+    playerScoreDisplay.textContent = `Player: ${scoreArray[0]}`;
+
+    const computerScoreDisplay = document.querySelector('#computer-score');
+    computerScoreDisplay.textContent = `Computer: ${scoreArray[1]}`;
+
+
+    if (scoreArray[0] === 5 || scoreArray[1] === 5){
+        winLoseMessage.textContent = chooseWinner(scoreArray);
+        buttons.forEach((button) => button.disabled = true);
+    }
+    
     }
 ));
